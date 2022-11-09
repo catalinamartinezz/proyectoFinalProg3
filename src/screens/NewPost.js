@@ -7,7 +7,7 @@ export default class NewPost extends Component {
     constructor(props){
         super(props)
         this.state={
-            decription:'',
+            description:'',
             likes:[], 
             comments:[],
             showCamera: true, 
