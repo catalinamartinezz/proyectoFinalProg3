@@ -9,9 +9,11 @@ export default class Register extends Component {
     super(props);
     this.state={
       email: '',
-      password:'',
+      pass:'',
       nombreUsuario:'',
-      errorMensaje:''
+      errorConsola:'',
+      errorMensaje:'',
+      miniBio:''
     }
   }
 
@@ -22,7 +24,14 @@ export default class Register extends Component {
       }
     })
   }
-  registerUser(email, pass, nombreUsuario) {
+  registerUser(email, pass, nombreUsuario, miniBio) {
+    if(this.state.email === '' && this.state.pass==='' && this.state.nombreUsuario===''){
+      this.setState(
+        {
+          errorMensaje:'Los campos contraseña, email y nombre de usuario son obligatorios'
+        }
+      )
+    }
 		auth
 			.createUserWithEmailAndPassword(email, pass)
 			.then((res) => {
@@ -30,30 +39,33 @@ export default class Register extends Component {
 					.collection('users')
 					.add({
 						email: email,
-						nombreUsuario:nombreUsuario
+						nombreUsuario:nombreUsuario,
+            miniBio: miniBio
+            
 					})
 				.then(res =>{
 					this.setState({
 						email:'',
 						pass:'',
-						posteos:[]
+						posteos:[],
+            miniBio:''
 					}); 
 				})
 				this.props.navigation.navigate('HomeMenu')
 			})
 			.catch(err => this.setState({
-				errorMensaje: err.message
+				errorConsola: err.message
 			}));
 	}
   render() {
     return (
-      <>
-    <View>
-        <Text>Registro</Text>
+    <View style={styles.container}>
+    <View >
+        <Text style={styles.logo}>GIRLSGRAM</Text>
         <View>
         <TextInput 
 				style={styles.campo} 
-				placeholder="email" 
+				placeholder="Email" 
 				keyboardType="email-address" 
 				onChangeText={(text) => {
 					this.setState({ 
@@ -69,46 +81,83 @@ export default class Register extends Component {
 			onChangeText={(text) => this.setState({ nombreUsuario: text })}
 			value={this.state.nombreUsuario}
 		/>
+    <TextInput
+			style={styles.campo}
+			placeholder="Mini Bio"
+			keyboardType="default"
+			onChangeText={(text) => this.setState({ miniBio: text })}
+			value={this.state.miniBio}
+		/>
+ 
 		<TextInput 
 			style={styles.campo} 
-			placeholder="password" 
+			placeholder="Contraseña" 
 			keyboardType="default" 
 			secureTextEntry 
 			onChangeText={(text) => this.setState({ pass: text })} 
 			value={this.state.pass} 
 		/>
-        <Text onPress={() => this.props.navigation.navigate('Login')}>Ya tengo cuenta</Text>
-        
-        <TouchableOpacity onPress={() => this.registerUser(this.state.email, this.state.pass, this.state.nombreUsuario)} style={styles.button}>
+        <TouchableOpacity onPress={() => this.registerUser(this.state.email, this.state.pass, this.state.nombreUsuario, this.state.miniBio)} style={styles.button}>
 						<Text style={styles.buttonText}>Registrarme</Text>
-					</TouchableOpacity>
+				</TouchableOpacity>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={styles.button}>
+          <Text style={styles.buttonText}>Ya tengo cuenta</Text>
+        </TouchableOpacity>
         </View>
-        <Text>{this.state.errorMensaje}</Text>
+        <Text style={styles.error}>{this.state.errorConsola}</Text>
+        <Text style={styles.error}>{this.state.errorMensaje}</Text>
     </View>
-    </>
+    </View>
+
     )
   }
 }
 const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+    alignItems: 'center',
+    justifyContent:'center',
+    backgroundColor: 'white',
+  },
   campo: {
-  fontSize: 16,
-  borderColor: '#ccc', 
-  borderWidth: 1, 
-  borderStyle: 'solid', 
-  borderRadius: 5, 
-  marginVertical: 8,
-  marginHorizontal: 16,
-  marginVertical: 8
-},
+    fontSize: 14,
+    fontWeight:'bold',
+    color: '#B2B2B2',
+    borderColor: '#B2B2B2', 
+    borderWidth: 2, 
+    borderStyle: 'solid', 
+    borderRadius: 5, 
+    marginVertical: 8,
+    marginHorizontal: 20,
+    marginVertical: 10,   
+  },
 button: {
   padding: 8, 
-  backgroundColor: 'pink', 
+  backgroundColor: '#BCCEF8', 
+  borderColor:'#BCCEF8',
   borderRadius: 8, 
   textAlign: 'center', 
-  marginHorizontal: 16
+  marginHorizontal: 20,
+  marginBottom:8,
+  
 }, 
 buttonText: {
-  fontSize: 24,
-  color: '#FAFAFA'
+  fontSize: 15,
+  fontStyle: 'bold',
+  color: '#FAFAFA',
+  fontWeight:'bold'
+},
+logo:{
+  fontStyle: 'italic',
+  fontWeight:'bold',
+  fontSize: 40,
+  color: '#000000',
+  textAlign: 'center',
+  marginBottom: 100
+  
+}, 
+error:{
+  textAlign: 'center' ,
+ 
 }
 });
