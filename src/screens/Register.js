@@ -97,9 +97,17 @@ export default class Register extends Component {
 			onChangeText={(text) => this.setState({ pass: text })} 
 			value={this.state.pass} 
 		/>
-        <TouchableOpacity onPress={() => this.registerUser(this.state.email, this.state.pass, this.state.nombreUsuario, this.state.miniBio)} style={styles.button}>
+   {
+    this.state.email === '' || this.state.pass==='' || this.state.nombreUsuario=== ''?
+      <TouchableOpacity  style={styles.buttonFalso}>
+        <Text style={styles.buttonText}>Registrarme</Text>
+      </TouchableOpacity>: 
+      
+      <TouchableOpacity onPress={() => this.registerUser(this.state.email, this.state.pass, this.state.nombreUsuario, this.state.miniBio)} style={styles.button}>
 						<Text style={styles.buttonText}>Registrarme</Text>
-				</TouchableOpacity>
+			</TouchableOpacity> 
+   }
+       
         <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={styles.button}>
           <Text style={styles.buttonText}>Ya tengo cuenta</Text>
         </TouchableOpacity>
@@ -145,6 +153,15 @@ buttonText: {
   fontStyle: 'bold',
   color: '#FAFAFA',
   fontWeight:'bold'
+},
+buttonFalso:{
+  padding: 8, 
+  backgroundColor: '#B2B2B2', 
+  borderColor:'#BCCEF8',
+  borderRadius: 8, 
+  textAlign: 'center', 
+  marginHorizontal: 20,
+  marginBottom:8,
 },
 logo:{
   fontStyle: 'italic',
