@@ -10,7 +10,7 @@ export default class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      logueado: false,
+      
     };
   }
   loginUser(email, password){ 
@@ -24,22 +24,27 @@ export default class Login extends Component {
 
   render() {
     return (
-      <View>
-         {
-        this.state.logueado ?
-        <Register /> :
+      <View style = {styles.container}>
+        <Text style = {styles.logo}>GIRLSGRAM</Text>
         <View>
-        <Text>Ingresar</Text>
     
-        <TextInput style={styles.field} placeholder="email" keyboardType="email-address" onChangeText={(text) => this.setState({ email: text })} value={this.state.email} />
-					<TextInput style={styles.field} placeholder="password" keyboardType="default" secureTextEntry onChangeText={(text) => this.setState({ password: text })} value={this.state.password} />
-					<Text onPress={() => this.loginUser(this.state.email, this.state.password)}>Loguearme</Text>
-					<Text onPress={() => this.props.navigation.navigate('Register')}>No tengo cuenta</Text>
-        <TouchableOpacity onPress={() => this.loginUser(this.state.email, this.state.password)}>
-          <Text onPress ={() => this.props.navigation.navigate('Home')}>Iniciar Sesión</Text>
+        <TextInput style={styles.campo} placeholder="email" keyboardType="email-address" onChangeText={(text) => this.setState({ email: text })} value={this.state.email} />
+					<TextInput style={styles.campo} placeholder="password" keyboardType="default" secureTextEntry onChangeText={(text) => this.setState({ password: text })} value={this.state.password} />
+					
+          {
+        this.state.email == '' || this.state.password == '' ?
+        <TouchableOpacity style = {styles.buttonFalso}>
+        <Text style = {styles.buttonText}>Iniciar Sesión</Text>
+      </TouchableOpacity> :
+        <TouchableOpacity onPress={() => this.loginUser(this.state.email, this.state.password)} style = {styles.button}>
+          <Text onPress ={() => this.props.navigation.navigate('HomeMenu')} style = {styles.buttonText}>Iniciar Sesión</Text>
         </TouchableOpacity>
-        </View>
           }
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')} style = {styles.button}>
+          <Text style = {styles.buttonText} >No tengo cuenta</Text>
+          </TouchableOpacity>
+        </View>
+          
     </View>
     
     );
@@ -47,6 +52,60 @@ export default class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-  field: {},
+  container:{
+    flex: 1,
+    alignItems: 'center',
+    justifyContent:'center',
+    backgroundColor: 'white',
+  },
+  campo: {
+    fontSize: 14,
+    fontWeight:'bold',
+    color: '#B2B2B2',
+    borderColor: '#B2B2B2', 
+    borderWidth: 2, 
+    borderStyle: 'solid', 
+    borderRadius: 5, 
+    marginVertical: 8,
+    marginHorizontal: 20,
+    marginVertical: 10,   
+  },
+button: {
+  padding: 8, 
+  backgroundColor: '#BCCEF8', 
+  borderColor:'#BCCEF8',
+  borderRadius: 8, 
+  textAlign: 'center', 
+  marginHorizontal: 20,
+  marginBottom:8,
+}, 
+buttonText: {
+  fontSize: 15,
+  fontStyle: 'bold',
+  color: '#FAFAFA',
+  fontWeight:'bold'
+},
+buttonFalso:{
+  padding: 8, 
+  backgroundColor: '#B2B2B2', 
+  borderColor:'#BCCEF8',
+  borderRadius: 8, 
+  textAlign: 'center', 
+  marginHorizontal: 20,
+  marginBottom:8,
+},
+logo:{
+  fontStyle: 'italic',
+  fontWeight:'bold',
+  fontSize: 40,
+  color: '#000000',
+  textAlign: 'center',
+  marginBottom: 100
+  
+}, 
+error:{
+  textAlign: 'center' ,
+ 
+}
 });
 
