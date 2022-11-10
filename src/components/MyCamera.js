@@ -54,7 +54,6 @@ export default class MyCamera extends Component {
   }
     render() {
     return (
-    <>
     <View style={styles.camera}>
         {this.state.permission?
             this.state.showCamera?
@@ -65,42 +64,63 @@ export default class MyCamera extends Component {
                     ref={(metodosDeCamara)=> this.metodosDeCamara= metodosDeCamara}
                 />
                 <TouchableOpacity
-                    style={{}}
+                    style={styles.button}
                     onPress={()=> this.takePicture()}
                 >
-                    <Text>Take Picture</Text>
+                    <Text style={styles.buttonText}>Take Picture</Text>
                 </TouchableOpacity>
             </View> :
             <View style={styles.camera}>
                 <Image
-                    style={styles.camera}
+                    style={styles.preview}
                     source={{uri:this.state.uri}}      
                     resizeMode='cover' 
                 />
+
                 <TouchableOpacity
-                 style={{}}
+                 style={styles.button}
                  onPress={()=> this.savePicture()}
                 >
-                    <Text>Save Picture</Text>
+                    <Text style={styles.buttonText}>Save Picture</Text>
                 </TouchableOpacity>
+
                 <TouchableOpacity
-                 style={{}}
+                 style={styles.button}
                  onPress={()=> this.clearPicture()}
                  >
-                <Text>Delete Picture</Text>
+                <Text style={styles.buttonText}>Delete Picture</Text>
                 </TouchableOpacity>
             </View>:
             <Text>Camera is not available</Text>
         }
-    </View>
-    </>
-      
+    </View>    
     )
   }
 }
 
 const styles = StyleSheet.create({
   camera:{
-    height:300
+    height:'100%',
+    width:'100%',
+  },
+  button: {
+    padding: 8, 
+    backgroundColor: '#BCCEF8', 
+    borderColor:'#BCCEF8',
+    borderRadius: 8, 
+    textAlign: 'center', 
+    marginHorizontal: 20,
+    marginBottom:8,
+  }, 
+  buttonText: {
+    fontSize: 15,
+    fontStyle: 'bold',
+    color: '#FAFAFA',
+    fontWeight:'bold'
+  },
+  preview:{
+    height:'50%',
+    width: '50%',
+    justifyContent:'center'
   }
 });

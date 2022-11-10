@@ -139,7 +139,6 @@ button: {
   textAlign: 'center', 
   marginHorizontal: 20,
   marginBottom:8,
-  
 }, 
 buttonText: {
   fontSize: 15,

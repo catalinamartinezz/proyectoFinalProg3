@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+
 import {View, Text, TouchableOpacity, Image, TextInput, StyleSheet} from 'react-native'
+
 import MyCamera from '../components/MyCamera'
+
 import {db,auth} from '../firebase/config'
 
 export default class NewPost extends Component {
@@ -39,16 +42,16 @@ export default class NewPost extends Component {
     }
     render() {
     return (
-    <View>
+    <View style={styles.container}>
      {
         this.state.showCamera? 
         <MyCamera
             onImageUpload={url=> this.onImageUpload(url)}
         /> :
-        <View>
+        <View style={styles.container}>
             <Text>New Post</Text>
             <TextInput
-                style={{}}
+                style={styles.campo}
                 keyboardType='default'
                 placeholder='Description'
                 onChangeText={(text)=>this.setState({
@@ -57,10 +60,10 @@ export default class NewPost extends Component {
                 multiline
             />
             <TouchableOpacity
-                style={{}}
+                style={styles.button}
                 onPress={()=>this.savePost()}
             >
-                <Text> Save Post</Text>
+                <Text style={styles.buttonText}> Save Post</Text>
             </TouchableOpacity>
         </View>
 
@@ -71,25 +74,38 @@ export default class NewPost extends Component {
 }
 
 const styles = StyleSheet.create({
-    campo: {
-    fontSize: 16,
-    borderColor: '#ccc', 
-    borderWidth: 1, 
-    borderStyle: 'solid', 
-    borderRadius: 5, 
-    marginVertical: 8,
-    marginHorizontal: 16,
-    marginVertical: 8
-  },
-  button: {
-    padding: 8, 
-    backgroundColor: 'pink', 
-    borderRadius: 8, 
-    textAlign: 'center', 
-    marginHorizontal: 16
-  }, 
-  buttonText: {
-    fontSize: 24,
-    color: '#FAFAFA'
-  }
+container:{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent:'center',
+        backgroundColor: 'white',
+      },
+campo: {
+        fontSize: 14,
+        fontWeight:'bold',
+        color: '#B2B2B2',
+        borderColor: '#B2B2B2', 
+        borderWidth: 2, 
+        borderStyle: 'solid', 
+        borderRadius: 5, 
+        marginVertical: 8,
+        marginHorizontal: 20,
+        marginVertical: 10,   
+      },
+      button: {
+        padding: 8, 
+        backgroundColor: '#BCCEF8', 
+        borderColor:'#BCCEF8',
+        borderRadius: 8, 
+        textAlign: 'center', 
+        marginHorizontal: 20,
+        marginBottom:8,
+        
+      }, 
+      buttonText: {
+        fontSize: 15,
+        fontStyle: 'bold',
+        color: '#FAFAFA',
+        fontWeight:'bold'
+      }
   });
