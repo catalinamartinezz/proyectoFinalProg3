@@ -10,16 +10,28 @@ export default class Login extends Component {
     this.state = {
       email: '',
       password: '',
+      errorConsola:'',
+      errorMensaje:'',
       
     };
   }
   loginUser(email, password){ 
+    if(this.state.email === '' && this.state.password===''){
+      this.setState(
+        {
+          errorMensaje:'Los campos contraseña y email son obligatorios'
+        }
+      )
+    }
     auth
+  
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
         this.props.navigation.navigate('HomeMenu');
       })
-      .catch((error) => console.log(error));
+      .catch(err => this.setState({
+				errorConsola: err.message
+			}));
   }
 
   render() {
@@ -37,14 +49,15 @@ export default class Login extends Component {
         <Text style = {styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity> :
         <TouchableOpacity onPress={() => this.loginUser(this.state.email, this.state.password)} style = {styles.button}>
-          <Text onPress ={() => this.props.navigation.navigate('HomeMenu')} style = {styles.buttonText}>Iniciar Sesión</Text>
+          <Text onPress ={() => this.loginUser(this.state.email, this.state.password)} style = {styles.buttonText}>Iniciar Sesión</Text>
         </TouchableOpacity>
           }
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')} style = {styles.button}>
           <Text style = {styles.buttonText} >No tengo cuenta</Text>
           </TouchableOpacity>
-        </View>
-          
+          <Text style={styles.error}>{this.state.errorConsola}</Text>
+        <Text style={styles.error}>{this.state.errorMensaje}</Text>
+        </View>   
     </View>
     
     );
