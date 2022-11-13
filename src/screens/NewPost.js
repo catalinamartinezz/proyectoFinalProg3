@@ -45,13 +45,12 @@ export default class NewPost extends Component {
     <View style={styles.container}>
      {
         this.state.showCamera? 
-        <MyCamera
+        <MyCamera style={styles.camera}
             onImageUpload={(url)=> this.onImageUpload(url)}
         /> :
-        <View style={styles.container}>
-            <Text>New Post</Text>
-            <TextInput
-                style={styles.campo}
+        <View style={styles.containerA}>
+            <Text style={styles.titulo}>Add description</Text>
+            <TextInput style={styles.descripcion}
                 keyboardType='default'
                 placeholder='Description'
                 onChangeText={(text)=>this.setState({
@@ -74,23 +73,27 @@ export default class NewPost extends Component {
 }
 
 const styles = StyleSheet.create({
-container:{
+    container:{
         flex: 1,
         alignItems: 'center',
         justifyContent:'center',
         backgroundColor: 'white',
+        borderColor: '#BCCEF8'
       },
-campo: {
+    containerA:{
+        borderColor: 'black', 
+        alignItems: 'center',
+        justifyContent:'center',
+    },
+    descripcion: {
         fontSize: 14,
         fontWeight:'bold',
         color: '#B2B2B2',
         borderColor: '#B2B2B2', 
         borderWidth: 2, 
         borderStyle: 'solid', 
-        borderRadius: 5, 
-        marginVertical: 8,
         marginHorizontal: 20,
-        marginVertical: 10,   
+        marginVertical: 10, 
       },
       button: {
         padding: 8, 
@@ -107,5 +110,14 @@ campo: {
         fontStyle: 'bold',
         color: '#FAFAFA',
         fontWeight:'bold'
+      },
+      camera:{
+        height: 50,
+        width: 50
+
+      }, 
+      titulo:{
+        fontWeight:'bold',
+        fontSize:30
       }
   });

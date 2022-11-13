@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import { auth, db } from '../firebase/config';
 import firebase from 'firebase';
+import {Ionicons, Fontisto} from '@expo/vector-icons'
 
 class Post extends Component {
 	constructor(props) {
@@ -55,14 +56,25 @@ class Post extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
+				{/* usuario */}
+				<Text style={styles.nombrePerfil}>
+					<Ionicons name="person" size={20} color='black' />
+					{this.props.dataPost.data.owner}
+				</Text>
+				{/* imagen  */}
 				<Image 
                     source={{uri: this.props.dataPost.data.url}}
                     resizeMode="contain"
                     style={styles.image}
                 />
-				<Text>Post de: {this.props.dataPost.data.owner}</Text>
-				<Text>Texto del Post: {this.props.dataPost.data.description}</Text>
-				<Text>Cantidad de likes: {this.state.qLikes}</Text>
+				{/* descripcion */}
+				<Text>{this.props.dataPost.data.description}</Text>
+				{/* cantidad de likes  */}
+				<Text>
+					<Fontisto name="like" size={20} color="black" />
+					{this.state.qLikes}
+				</Text>
+				{/* boton like/dislike */}
 				{this.state.miLike ? (
 					<TouchableOpacity style={styles.button} onPress={() => this.unLike()}>
 						<Text style={styles.buttonText}>Quitar Like</Text>
@@ -79,7 +91,8 @@ class Post extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		borderBottomColor: '#BCCEF8',
+		alignItems:'flex-start',
+		borderBottomColor: '#ddd',
 		borderBottomWidth: 1,
 		marginBottom: 10,
 		paddingHorizontal: 20,
@@ -87,7 +100,6 @@ const styles = StyleSheet.create({
     button: {
       padding: 8, 
       backgroundColor: '#BCCEF8', 
-      borderColor:'#BCCEF8',
       borderRadius: 8, 
       textAlign: 'center', 
       marginHorizontal: 20,
@@ -95,13 +107,22 @@ const styles = StyleSheet.create({
     }, 
     buttonText: {
       fontSize: 15,
-      fontStyle: 'bold',
       color: '#FAFAFA',
       fontWeight:'bold'
     }, 
 	image: {
 		height: 100,
 		width: 100
+	},
+	nombrePerfil:{
+		fontSize: 18,
+      	fontStyle: 'bold',
+      	color: 'black',
+      	fontWeight:'bold'
+	},
+	textDescripcion:{
+		fontSize:16 
+
 	}
 });
 

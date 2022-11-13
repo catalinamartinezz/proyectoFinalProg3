@@ -54,10 +54,12 @@ export default class MyCamera extends Component {
   }
     render() {
     return (
+    <View style={styles.container}>
     <View style={styles.camera}>
         {this.state.permission?
             this.state.showCamera?
             <View style={styles.camera}>
+              <Text style={styles.titulo}> Smile</Text>
                 <Camera
                     style={styles.camera}
                     type={Camera.Constants.Type.back}
@@ -71,12 +73,12 @@ export default class MyCamera extends Component {
                 </TouchableOpacity>
             </View> :
             <View style={styles.camera}>
+              <Text style={styles.titulo}>Save or delete Picture</Text>
                 <Image
                     style={styles.preview}
                     source={{uri:this.state.uri}}      
                     resizeMode='cover' 
                 />
-
                 <TouchableOpacity
                  style={styles.button}
                  onPress={()=> this.savePicture()}
@@ -91,17 +93,28 @@ export default class MyCamera extends Component {
                 <Text style={styles.buttonText}>Delete Picture</Text>
                 </TouchableOpacity>
             </View>:
-            <Text>Camera is not available</Text>
+            <Text style={styles.titulo}>Camera is not available</Text>
         }
     </View>    
+    </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  camera:{
+  container:{
+    alignItems: 'center',
+    justifyContent:'center',
+    backgroundColor: 'white',
+    borderColor: '#BCCEF8',
     height:'100%',
     width:'100%',
+  },
+  camera:{
+    height:500,
+    width:500,
+    alignItems: 'center',
+    justifyContent:'center',
   },
   button: {
     padding: 8, 
@@ -121,6 +134,12 @@ const styles = StyleSheet.create({
   preview:{
     height:'50%',
     width: '50%',
-    justifyContent:'center'
+    justifyContent:'center',
+    marginBottom: 10,
+    marginTop:10
+  },
+  titulo:{
+    fontWeight:'bold',
+    fontSize:30
   }
 });
