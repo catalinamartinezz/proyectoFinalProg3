@@ -14,17 +14,17 @@ function HomeMenu() {
 			<Tab.Screen 
 				name="Home" 
 				component={Home} 
-				options={{tabBarIcon:()=> <Foundation name="home" size={24} color="pink"/>}}
+				options={{tabBarIcon:()=> <Foundation name="home" size={24} color="#98A8F8"/>}}
 			/>
 			<Tab.Screen 
 				name="Profile" 
 				component={Profile} 
-				options={{tabBarIcon:()=> <Ionicons name="person" size={24} color="pink" />}}
+				options={{tabBarIcon:()=> <Ionicons name="person" size={24} color="#98A8F8" />}}
 			/>
 			<Tab.Screen 
 				name="NewPost" 
 				component={NewPost} 
-				options={{ tabBarIcon: () => <Foundation name="photo" size={24} color="pink" /> }}
+				options={{ tabBarIcon: () => <Foundation name="photo" size={24} color="#98A8F8" /> }}
 			/>
 		</Tab.Navigator>
 	);
