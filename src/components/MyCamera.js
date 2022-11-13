@@ -35,7 +35,7 @@ export default class MyCamera extends Component {
     fetch(this.state.uri)
     .then(res=>res.blob())
     .then(image => {
-        const ref= storage.ref(`photo/${Date.now}.jpg`)
+        const ref= storage.ref(`photo/${Date.now()}.jpg`)
         ref.put(image)
             .then(()=>{
                 ref.getDownloadURL()

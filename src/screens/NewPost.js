@@ -21,7 +21,7 @@ export default class NewPost extends Component {
         db.collection('posts').add({
             createdAt:Date.now(),
             owner: auth.currentUser.email,
-            decription:this.state.description,
+            description:this.state.description,
             likes:[],
             comments:[], 
             url: this.state.url
@@ -46,7 +46,7 @@ export default class NewPost extends Component {
      {
         this.state.showCamera? 
         <MyCamera
-            onImageUpload={url=> this.onImageUpload(url)}
+            onImageUpload={(url)=> this.onImageUpload(url)}
         /> :
         <View style={styles.container}>
             <Text>New Post</Text>
