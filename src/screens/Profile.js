@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { FlatList, Text, TouchableOpacity, View } from 'react-native-web';
 import {auth,db} from '../firebase/config';
+import Post from './Post';
 
 
 export default class Profile extends Component {
@@ -9,7 +10,7 @@ export default class Profile extends Component {
     this.state={
       user:{},
       loading:true,
-      post:{},
+      post:[],
     };
   }
   componentDidMount(){
@@ -31,17 +32,17 @@ export default class Profile extends Component {
     db.collection('posts')
     .where('email', '==', auth.currentUser.email)
     .onSnapshot((docs)=>{
-      let postsFromDb=[];
+      let postsFromDb={};
       docs.forEach((doc)=>{
-        let posteo= doc.data();
+        let posteo=doc.data;
+        console.log(posteo);
         postsFromDb={
           id: doc.id,
-          data:posteo,
-        };
-        console.log(postsFromDb);
+          data:posteo()
+        }
       });
       this.setState({
-        posts:postsFromDb,
+        post:postsFromDb,
       });
     });
   }
@@ -64,7 +65,13 @@ logOut(){
         <Text>Cerrar Sesion</Text>
       </TouchableOpacity>
     </View>}
-    
+    <FlatList
+    data={this.state.post}
+    keyExtractor={post =>post.id}
+    renderItem={({item})=><Post dataItem={item}/>}
+    >
+
+    </FlatList>
       </>
 
       
