@@ -50,7 +50,7 @@ class Home extends Component {
                         {...this.props} />}
                     /> 
                 </View>
-                </ScrollView>
+            </ScrollView>
 
         )
     }

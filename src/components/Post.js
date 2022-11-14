@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import { auth, db } from '../firebase/config';
 import firebase from 'firebase';
-import {Ionicons, Fontisto} from '@expo/vector-icons'
+import {Ionicons, Fontisto, FontAwesome,AntDesign} from '@expo/vector-icons'
 
 class Post extends Component {
 	constructor(props) {
@@ -70,24 +70,33 @@ class Post extends Component {
 				{/* descripcion */}
 				<Text>{this.props.dataPost.data.description}</Text>
 				{/* cantidad de likes  */}
-				<Text>
-					<Fontisto name="like" size={20} color="black" />
-					{this.state.qLikes}
-				</Text>
 				{/* boton like/dislike */}
 				{this.state.miLike ? (
-					<TouchableOpacity style={styles.button} onPress={() => this.unLike()}>
-						<Text style={styles.buttonText}>Quitar Like</Text>
-					</TouchableOpacity>
+					<View style={styles.containerIconos}>
+						<Text style={styles.iconos}>
+							<Fontisto name="like" size={20} color="black" />
+							{this.state.qLikes}	
+						</Text>
+						<TouchableOpacity onPress={() => this.unLike()} style={styles.iconos}>
+							<AntDesign name="heart" size={24} color="black" />
+						</TouchableOpacity>
+						<TouchableOpacity onPress={() => this.props.navigation.navigate("Comments", {id:this.props.dataPost.id})} style={styles.iconos}>
+							<FontAwesome name="comments" size={24} color="black" />
+						</TouchableOpacity>
+					</View>
 				) : (
-					<>
-					<TouchableOpacity onPress={() => this.like()} style={styles.button}>
-						<Text style={styles.buttonText}>Like</Text>
-					</TouchableOpacity>
-					<TouchableOpacity onPress={() => this.props.navigation.navigate("Comments", {id:this.props.dataPost.id})} style={styles.button}>
-					<Text style={styles.buttonText}>Comments</Text>
-				</TouchableOpacity>
-				</>
+					<View style={styles.containerIconos}>
+						<Text style={styles.iconos}>
+							<Fontisto name="like" size={20} color="black" />
+							{this.state.qLikes}	
+						</Text>
+						<TouchableOpacity onPress={() => this.like()} style={styles.iconos}>
+							<AntDesign name="hearto" size={24} color="black" />
+						</TouchableOpacity>
+						<TouchableOpacity onPress={() => this.props.navigation.navigate("Comments", {id:this.props.dataPost.id})} style={styles.iconos}>
+							<FontAwesome name="comments" size={24} color="black" />
+						</TouchableOpacity>
+					</View>
 				)}
 			</View>
 		);
@@ -101,6 +110,13 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		marginBottom: 10,
 		paddingHorizontal: 20,
+		maxWidth:200
+	},
+	containerIconos:{
+		flexDirection:'row',
+	},
+	iconos:{
+		marginLeft:8
 	},
     button: {
       padding: 8, 
