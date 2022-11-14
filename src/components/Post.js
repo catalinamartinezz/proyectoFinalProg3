@@ -68,7 +68,7 @@ class Post extends Component {
                     style={styles.image}
                 />
 				{/* descripcion */}
-				<Text>{this.props.dataPost.data.description}</Text>
+				<Text style={styles.descripcion}>{this.props.dataPost.data.description}</Text>
 				{/* cantidad de likes  */}
 				{/* boton like/dislike */}
 				{this.state.miLike ? (
@@ -110,13 +110,17 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		marginBottom: 10,
 		paddingHorizontal: 20,
-		maxWidth:200
 	},
 	containerIconos:{
 		flexDirection:'row',
 	},
 	iconos:{
-		marginLeft:8
+		marginLeft:10
+	},
+	descripcion:{
+		fontSize:18,
+		marginBottom:10
+		
 	},
     button: {
       padding: 8, 
@@ -132,11 +136,12 @@ const styles = StyleSheet.create({
       fontWeight:'bold'
     }, 
 	image: {
-		height: 100,
-		width: 100
+		height: 200,
+		width: 200,
+		alignSelf: 'center'
 	},
 	nombrePerfil:{
-		fontSize: 18,
+		fontSize: 20,
       	fontStyle: 'bold',
       	color: 'black',
       	fontWeight:'bold'

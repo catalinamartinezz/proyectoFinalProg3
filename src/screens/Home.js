@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
 import { db, auth } from '../firebase/config';
 import { View,
-         Text,
-         TouchableOpacity, 
-         StyleSheet, 
-         ActivityIndicator,
          FlatList, 
-         Image,
         ScrollView } from 'react-native';
 import Post from '../components/Post';
 
