@@ -25,7 +25,7 @@ export default class Register extends Component {
     })
   }
   registerUser(email, pass, nombreUsuario, miniBio) {
-    if(this.state.email === '' && this.state.pass==='' && this.state.nombreUsuario===''){
+    if(this.state.email === '' || this.state.pass==='' || this.state.nombreUsuario===''){
       this.setState(
         {
           errorMensaje:'Los campos contraseña, email y nombre de usuario son obligatorios'
@@ -99,7 +99,7 @@ export default class Register extends Component {
 		/>
    {
     this.state.email === '' || this.state.pass==='' || this.state.nombreUsuario=== ''?
-      <TouchableOpacity  style={styles.buttonFalso}>
+      <TouchableOpacity  style={styles.buttonFalso} onPress={() => this.registerUser(this.state.email, this.state.pass, this.state.nombreUsuario, this.state.miniBio)}>
         <Text style={styles.buttonText}>Registrarme</Text>
       </TouchableOpacity>: 
       
