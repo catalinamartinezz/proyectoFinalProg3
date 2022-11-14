@@ -116,28 +116,8 @@ const styles = StyleSheet.create({
       color: '#FAFAFA',
       fontWeight:'bold'
     },
-    buttonFalso:{
-      padding: 8, 
-      backgroundColor: '#B2B2B2', 
-      borderColor:'#BCCEF8',
-      borderRadius: 8, 
-      textAlign: 'center', 
-      marginHorizontal: 20,
-      marginBottom:8,
-    },
-    logo:{
-      fontStyle: 'italic',
-      fontWeight:'bold',
-      fontSize: 40,
-      color: '#000000',
-      textAlign: 'center',
-      marginBottom: 100
-      
-    }, 
-    error:{
-      textAlign: 'center' ,
-     
-    }
+    
+    
     });
 
 export default Search;
