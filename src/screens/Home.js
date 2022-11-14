@@ -6,7 +6,8 @@ import { View,
          StyleSheet, 
          ActivityIndicator,
          FlatList, 
-         Image } from 'react-native';
+         Image,
+        ScrollView } from 'react-native';
 import Post from './Post';
 
 class Home extends Component {
@@ -40,20 +41,19 @@ class Home extends Component {
 
     render(){
         return(
-                <View>
-                    <Text>Posteos</Text>
+            <ScrollView>
+                <View> 
                     <FlatList 
                         data={this.state.posts}
                         keyExtractor={post => post.id}
                         renderItem = { ({item}) => <Post dataPost={item} 
                         {...this.props} />}
-                    />
-                    
+                    /> 
                 </View>
+                </ScrollView>
 
         )
     }
 }
-
 
 export default Home;
