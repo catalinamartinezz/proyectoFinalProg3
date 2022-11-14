@@ -6,6 +6,8 @@ import MyCamera from '../components/MyCamera'
 
 import {db,auth} from '../firebase/config'
 
+import Post from '../components/Post'
+
 export default class NewPost extends Component {
     constructor(props){
         super(props)
@@ -120,4 +122,4 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontSize:30
       }
-  });
+  })
