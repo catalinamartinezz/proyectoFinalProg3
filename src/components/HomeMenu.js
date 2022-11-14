@@ -1,6 +1,7 @@
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import NewPost from "../screens/NewPost";
+import React, { Component } from 'react';
 
 import {Foundation, Ionicons} from '@expo/vector-icons'
 
@@ -8,7 +9,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
 
-function HomeMenu() {
+export default class HomeMenu extends Component {
+	constructor(props){
+		super(props);
+	}
+	render(){
+		console.log(this.props.route.params);
 	return (
 		<Tab.Navigator>
 			<Tab.Screen 
@@ -28,6 +34,7 @@ function HomeMenu() {
 			/>
 		</Tab.Navigator>
 	);
+	}
 }
 
-export default HomeMenu;
+

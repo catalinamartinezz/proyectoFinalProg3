@@ -80,9 +80,14 @@ class Post extends Component {
 						<Text style={styles.buttonText}>Quitar Like</Text>
 					</TouchableOpacity>
 				) : (
+					<>
 					<TouchableOpacity onPress={() => this.like()} style={styles.button}>
 						<Text style={styles.buttonText}>Like</Text>
 					</TouchableOpacity>
+					<TouchableOpacity onPress={() => this.props.navigation.navigate("Comments", {id:this.props.dataPost.id})} style={styles.button}>
+					<Text style={styles.buttonText}>Comments</Text>
+				</TouchableOpacity>
+				</>
 				)}
 			</View>
 		);
