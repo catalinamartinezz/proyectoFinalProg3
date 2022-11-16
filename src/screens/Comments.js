@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { db, auth} from '../firebase/config';
-import {View, Text, TouchableOpacity, ScrollView, Image, TextInput, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView, Image, TextInput, StyleSheet, Flatlist} from 'react-native';
 import firebase from 'firebase';
-import { FlatList } from 'react-native-web';
 
 
 

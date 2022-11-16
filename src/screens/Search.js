@@ -74,8 +74,10 @@ class Search extends Component{
                        data={this.state.resultado}
                        keyExtractor={(item) => item.id}
                        renderItem={({ item }) => (
-                           <View> 
-                               <Text> {item.data.nombreUsuario}</Text>
+                           <View>
+                            <TouchableOpacity  onPress={() => this.props.navigation.navigate("UserProfile", {id:this.props.id})} >
+                                <Text> {item.data.nombreUsuario}</Text>
+                            </TouchableOpacity>
                             </View> )}
                     />
                 </View>
