@@ -118,7 +118,10 @@ const styles = StyleSheet.create({
       color: '#FAFAFA',
       fontWeight:'bold'
     },
-    
+    titulo:{
+        fontWeight:'bold',
+        fontSize:30
+      }
     
     });
 
