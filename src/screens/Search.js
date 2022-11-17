@@ -27,10 +27,7 @@ class Search extends Component{
                     })
                 })
                 this.setState(
-                    {
-                        users:usersFromDb
-                        
-                    }
+                    {users:usersFromDb}
                 )
     })}
     search(){  
@@ -70,6 +67,8 @@ class Search extends Component{
                             <Text style={ styles.text}>Search</Text>
                         </TouchableOpacity>                         
                     </View>
+                    { this.state.busqueda == '' ?
+                     <Text> No se encontraron resultados a tu búsqueda.</Text> :
                     <FlatList 
                        data={this.state.resultado}
                        keyExtractor={(item) => item.id}
@@ -80,6 +79,7 @@ class Search extends Component{
                             </TouchableOpacity>
                             </View> )}
                     />
+                       }
                 </View>
         )}}
 
