@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { db, auth} from '../firebase/config';
-import {View, Text, TouchableOpacity, ScrollView, Image, TextInput, StyleSheet, Flatlist} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView, Image, TextInput, StyleSheet, FlatList} from 'react-native';
 import firebase from 'firebase';
 
 
@@ -10,32 +10,24 @@ export default class Comments extends Component {
 		super(props)
         this.state={
             comments:[],
-            comentario:"",
-            users:{},
-            
+            comentario:"",  
         }
 	};
    componentDidMount(){
     db.collection('posts')
     .doc(this.props.route.params.id)
     .onSnapshot(doc=>{
-      let commentsFromDb =[];
-      let comments= doc.data().comments
-      commentsFromDb.push({
-        id: doc.id,
-        data:comments
-      })
-      this.setState({comments: commentsFromDb})
+      this.setState({comments: doc.data().comments})
     })
-    
-    
-
     };
     saveComment(){
       db.collection('posts')
       .doc(this.props.route.params.id)
       .update({
-        comments:firebase.firestore.FieldValue.arrayUnion(this.state.comentario
+        comments:firebase.firestore.FieldValue.arrayUnion({
+          owner:auth.currentUser.email,
+          description: this.state.comentario
+        }
         ),
   
       })
@@ -48,7 +40,7 @@ export default class Comments extends Component {
   render() {
     return (
       <>
-      {this.state.comments == ""? <Text>No hay comentarios en este posteo</Text>:
+      {this.state.comments.length == 0? <Text>No hay comentarios en este posteo</Text>:
       <View>
       <Text>Comentarios</Text>
       <FlatList
@@ -56,7 +48,8 @@ export default class Comments extends Component {
       keyExtractor={(item)=>item.id}
       renderItem={({item})=>(
         <View style={styles.comentario}>
-          <Text>{item.data}</Text>
+          <Text>{item.description}</Text>
+          <Text>{item.owner}</Text>
         </View>
       )}
       />
