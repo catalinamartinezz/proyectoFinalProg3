@@ -15,6 +15,7 @@ export default class Login extends Component {
       
     };
   }
+
   loginUser(email, password){ 
     if(this.state.email === '' && this.state.password===''){
       this.setState(
@@ -24,7 +25,6 @@ export default class Login extends Component {
       )
     }
     auth
-  
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
         this.props.navigation.navigate('HomeMenu');
@@ -45,7 +45,7 @@ export default class Login extends Component {
 					
           {
         this.state.email == '' || this.state.password == '' ?
-        <TouchableOpacity style = {styles.buttonFalso}>
+        <TouchableOpacity onPress={() => this.loginUser(this.state.email, this.state.password)} style = {styles.buttonFalso}>
         <Text style = {styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity> :
         <TouchableOpacity onPress={() => this.loginUser(this.state.email, this.state.password)} style = {styles.button}>

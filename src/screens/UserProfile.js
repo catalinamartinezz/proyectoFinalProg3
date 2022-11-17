@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { FlatList, Text, TouchableOpacity, View } from 'react-native-web';
+import { auth, db } from '../firebase/config';
+import Post from '../components/Post';
 
 export default class UserProfile extends Component {
     constructor(props) {
@@ -12,6 +15,7 @@ export default class UserProfile extends Component {
       componentDidMount() {
         db.collection('users')
           .where('email', '==', this.props.route.params.id)
+          console.log(this.props)
           .onSnapshot((docs) => {
             let usersFromDb = {};
             docs.forEach((doc) => {
