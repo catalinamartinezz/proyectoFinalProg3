@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import  { Camera } from 'expo-camera'
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native'
 import {storage} from '../firebase/config'
+import {Entypo, AntDesign} from '@expo/vector-icons'
 
 export default class MyCamera extends Component {
   constructor(props){
@@ -69,7 +70,7 @@ export default class MyCamera extends Component {
                     style={styles.button}
                     onPress={()=> this.takePicture()}
                 >
-                    <Text style={styles.buttonText}>Take Picture</Text>
+                    <Text style={styles.buttonText}><Entypo name="camera" size={24} color="white" /></Text>
                 </TouchableOpacity>
             </View> :
             <View style={styles.camera}>
@@ -83,14 +84,14 @@ export default class MyCamera extends Component {
                  style={styles.button}
                  onPress={()=> this.savePicture()}
                 >
-                    <Text style={styles.buttonText}>Save Picture</Text>
+                    <Text style={styles.buttonText}><Entypo name="save" size={20} color="white" /> Picture </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                  style={styles.button}
                  onPress={()=> this.clearPicture()}
                  >
-                <Text style={styles.buttonText}>Delete Picture</Text>
+                <Text style={styles.buttonText}><AntDesign name="delete" size={20} color="white" /> Picture</Text>
                 </TouchableOpacity>
             </View>:
             <Text style={styles.titulo}>Camera is not available</Text>

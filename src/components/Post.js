@@ -78,7 +78,7 @@ class Post extends Component {
 							{this.state.qLikes}	
 						</Text>
 						<TouchableOpacity onPress={() => this.unLike()} style={styles.iconos}>
-							<AntDesign name="heart" size={24} color="black" />
+							<AntDesign name="heart" size={24} color="red" />
 						</TouchableOpacity>
 						<TouchableOpacity onPress={() => this.props.navigation.navigate("Comments", {id:this.props.dataPost.id})} style={styles.iconos}>
 							<FontAwesome name="comments" size={24} color="black" />

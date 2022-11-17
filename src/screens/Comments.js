@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { db, auth} from '../firebase/config';
 import {View, Text, TouchableOpacity, ScrollView, Image, TextInput, StyleSheet, FlatList} from 'react-native';
 import firebase from 'firebase';
+import {Ionicons, Fontisto} from '@expo/vector-icons'
 
 
 
@@ -39,50 +40,75 @@ export default class Comments extends Component {
    
   render() {
     return (
-      <>
-      {this.state.comments.length == 0? <Text>No hay comentarios en este posteo</Text>:
+      <View style={styles.container}>
+      {this.state.comments.length == 0? <Text >No hay comentarios en este posteo</Text>:
       <View>
-      <Text>Comentarios</Text>
-      <FlatList
-      data={this.state.comments}
-      keyExtractor={(item)=>item.id}
-      renderItem={({item})=>(
-        <View style={styles.comentario}>
-          <Text>{item.description}</Text>
-          <Text>{item.owner}</Text>
-        </View>
+        {/* <Text style={styles.titulo}>Comentarios del posteo</Text> */}
+      
+      <FlatList 
+        data={this.state.comments}
+        keyExtractor={(item)=>item.id}
+        renderItem={({item})=>(
+          <View style={styles.comentario}>
+            <Text  style={styles.nombrePerfil} >
+              <Ionicons name="person" size={20} color='black' />
+               {item.owner}
+            </Text>
+            <Text>
+              <Fontisto name="comment" size={15} color="black" />
+               {item.description}
+            </Text>
+            
+         </View>
       )}
       />
       </View>}
-      <View>
-      <Text>Agregar comentario</Text>
-      <TextInput
+      
+      <View style={styles.containerComentario}>
+      {/* <Text style={styles.titulo2}>Agregar comentario</Text> */}
+      <TextInput style={styles.descripcion}
       keyboardType='default'
-      placeholder='Comentario'
+      placeholder='Agrega un comentario'
       onChangeText={(text)=> this.setState(
         {comentario:text}
       )}
       />
       {this.state.comentario == ""?
        <TouchableOpacity style={styles.buttonFalso} onPress={()=>this.saveComment()}>
-       <Text>Subir comentario</Text>
+       <Text style={styles.buttonText}>Publicar</Text>
      </TouchableOpacity>:
-      <TouchableOpacity  style={styles.buttonText} onPress={()=>this.saveComment()}>
-        <Text>Subir comentario</Text>
+      <TouchableOpacity  style={styles.button} onPress={()=>this.saveComment()}>
+        <Text style={styles.buttonText}>Publicar</Text>
       </TouchableOpacity>
       }
-      <TouchableOpacity style={styles.buttonText} onPress={()=>this.props.navigation.navigate('Home')}>
-        <Text>Volver a la pagina principal</Text>
+      <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Home')}>
+        <Text style={styles.buttonText}>Volver a la pagina principal</Text>
       </TouchableOpacity>
       </View>
-      </>
+      </View>
     )
   }
 }
 const styles = StyleSheet.create({
   comentario: {
-    flexDirection:'column'
+    flexDirection:'column',
+    borderBottomColor: '#ddd',
+		borderBottomWidth: 1,
+		marginBottom: 10,
+		paddingHorizontal: 0,
   },
+  containerComentario:{
+ 
+  },
+  button: {
+    padding: 8, 
+    backgroundColor: '#BCCEF8', 
+    borderColor:'#BCCEF8',
+    borderRadius: 8, 
+    textAlign: 'center', 
+    marginHorizontal: 20,
+    marginBottom:8,
+  }, 
   buttonText: {
     fontSize: 15,
     fontStyle: 'bold',
@@ -98,5 +124,34 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginBottom:8,
   },
+  titulo:{
+    fontWeight:'bold',
+    fontSize:20, 
+    borderBottomColor:'#ddd',
+    borderBottomWidth: 1,
+    textAlign:'center'
+  },
+  titulo2:{
+    fontWeight:'bold',
+    fontSize:20, 
+    textAlign:'center'
+  },
+  descripcion: {
+    fontSize: 14,
+    fontWeight:'bold',
+    color: '#B2B2B2',
+    borderColor: '#B2B2B2', 
+    borderWidth: 2, 
+    borderStyle: 'solid', 
+    marginHorizontal: 20,
+    marginVertical: 10, 
+  },
+  nombrePerfil:{
+		fontSize: 15,
+    fontStyle: 'bold',
+    color: 'black',
+    fontWeight:'bold',
+    alignSelf:'flex-start',
+	},
   
 })

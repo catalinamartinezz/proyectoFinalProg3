@@ -74,6 +74,7 @@ export default class Register extends Component {
 				}} 
 				value={this.state.email} 
         />
+    
 		<TextInput
 			style={styles.campo}
 			placeholder="Nombre de usuario"
@@ -81,6 +82,7 @@ export default class Register extends Component {
 			onChangeText={(text) => this.setState({ nombreUsuario: text })}
 			value={this.state.nombreUsuario}
 		/>
+    
     <TextInput
 			style={styles.campo}
 			placeholder="Mini Bio"
@@ -88,7 +90,7 @@ export default class Register extends Component {
 			onChangeText={(text) => this.setState({ miniBio: text })}
 			value={this.state.miniBio}
 		/>
- 
+    
 		<TextInput 
 			style={styles.campo} 
 			placeholder="Contraseña" 
@@ -137,7 +139,8 @@ const styles = StyleSheet.create({
     borderRadius: 5, 
     marginVertical: 8,
     marginHorizontal: 20,
-    marginVertical: 10,   
+    marginVertical: 10,
+  
   },
 button: {
   padding: 8, 
@@ -175,5 +178,6 @@ logo:{
 error:{
   textAlign: 'center' ,
  
-}
+},
+
 });
