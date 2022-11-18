@@ -11,7 +11,7 @@ class Search extends Component{
     constructor(props){
         super(props);
         this.state={
-            resultado:[],
+            resultado: true,
             users:[],
             busqueda:'',
         }
@@ -27,11 +27,14 @@ class Search extends Component{
                     })
                 })
                 this.setState(
-                    {users:usersFromDb}
+                    {
+                        users:usersFromDb
+                        
+                    }
                 )
     })}
     search(){  
-        if(this.state.busqueda.length>0){
+        if(this.state.busqueda){
 
             let nuevoArray = this.state.users.filter((user) => {
                 
@@ -67,8 +70,8 @@ class Search extends Component{
                             <Text style={ styles.text}>Search</Text>
                         </TouchableOpacity>                         
                     </View>
-                    { this.state.busqueda == '' ?
-                     <Text> No se encontraron resultados a tu búsqueda.</Text> :
+                    { this.state.resultado == false ?
+                     <Text> No se encontraron resultados de búsqueda.</Text> :
                     <FlatList 
                        data={this.state.resultado}
                        keyExtractor={(item) => item.id}
