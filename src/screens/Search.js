@@ -21,9 +21,10 @@ class Search extends Component{
             users => {
                 let usersFromDb = [];
                 users.forEach( (user) => {
+                    let userData = user.data();
                     usersFromDb.push({
                         id: user.id,
-                        data: user.data()
+                        data: userData,
                     })
                 })
                 this.setState(
@@ -77,7 +78,7 @@ class Search extends Component{
                        keyExtractor={(item) => item.id}
                        renderItem={({ item }) => (
                            <View>
-                            <TouchableOpacity  onPress={() => this.props.navigation.navigate("UserProfile", {id:this.props.id})} >
+                            <TouchableOpacity  onPress={() => this.props.navigation.navigate("UserProfile", {owner:item.data.email})} >
                                 <Text> {item.data.nombreUsuario}</Text>
                             </TouchableOpacity>
                             </View> )}

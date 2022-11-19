@@ -14,8 +14,7 @@ export default class UserProfile extends Component {
       }
       componentDidMount() {
         db.collection('users')
-          .where('email', '==', this.props.route.params.id)
-          console.log(this.props)
+          .where('email', '==', this.props.route.params.owner)
           .onSnapshot((docs) => {
             let usersFromDb = {};
             docs.forEach((doc) => {
@@ -30,7 +29,7 @@ export default class UserProfile extends Component {
             this.setState({ user: usersFromDb, loading: false });
           });
         db.collection('posts')
-          .where('owner', '==', this.props.route.params.id)
+          .where('owner', '==', this.props.route.params.owner)
           .onSnapshot(docs => {
             let postsFromDb = [];
             docs.forEach(oneDoc => {
@@ -49,7 +48,20 @@ export default class UserProfile extends Component {
     
   render() {
     return (
-      <div>UserProfile</div>
+        <>
+        {this.state.loading ? <Text>Cargando</Text> : <View>
+          <Text>{this.state.user.data.nombreUsuario}</Text>
+          <Text>{this.state.user.data.email}</Text>
+          <Text>{this.state.user.data.miniBio}</Text>
+          <Text>{this.state.post.length} posteos</Text>
+        </View>}
+        <FlatList
+          data={this.state.post}
+          keyExtractor={post => post.id}
+          renderItem={({ item }) => <Post dataPost={item}
+            {...this.props} />}
+        />
+      </>
     )
   }
 }
