@@ -55,12 +55,15 @@ export default class UserProfile extends Component {
           <Text>{this.state.user.data.miniBio}</Text>
           <Text>{this.state.post.length} posteos</Text>
         </View>}
-        <FlatList
+        {this.state.post.length === 0 ? <Text> Aun no hay posteos </Text>: 
+          <FlatList
           data={this.state.post}
           keyExtractor={post => post.id}
           renderItem={({ item }) => <Post dataPost={item}
             {...this.props} />}
         />
+        }
+      
       </>
     )
   }
