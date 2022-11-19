@@ -82,14 +82,12 @@ export default class Profile extends Component {
           <Text style={styles.descripcion}>{this.state.post.length} posteos</Text>
           </View>
         
-        
           <TouchableOpacity  style={styles.button} onPress={() => this.logOut()}>
             <Text style={styles.buttonText}>Cerrar Sesion</Text>
           </TouchableOpacity>
           <Text style={styles.nombrePerfil}>Posteos</Text>
           {this.state.post.length === 0 ? <Text> Aun no hay posteos </Text> : 
         <>
-    
           <FlatList
             data={this.state.post}
             keyExtractor={post => post.id}
