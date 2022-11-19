@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { FlatList, Text, TouchableOpacity, View, ScrollView } from 'react-native-web';
 import { auth, db } from '../firebase/config';
 import Post from '../components/Post';
-import {Ionicons, Fontisto, FontAwesome,AntDesign, Entypo, MaterialCommunityIcons} from '@expo/vector-icons'
+import {Ionicons, Entypo, MaterialCommunityIcons} from '@expo/vector-icons'
 
 
 
@@ -23,10 +23,10 @@ export default class Profile extends Component {
         docs.forEach((doc) => {
           let user = doc.data();
           console.log(user);
-          usersFromDb = {
+          usersFromDb = ({
             id: doc.id,
             data: user,
-          };
+          });
 
         });
         this.setState({ user: usersFromDb, loading: false });
@@ -65,54 +65,56 @@ export default class Profile extends Component {
 
     return (
       <ScrollView>
-        {this.state.loading ? <Text>Cargando</Text> : <View>
+        {this.state.loading ? <Text>Cargando</Text> : 
+        <View>
           <Text style={styles.nombrePerfil}>
             <Ionicons style={styles.iconos}name="person" size={24} color='black' />
             {this.state.user.data.nombreUsuario}
           </Text>
           <View style={styles.container1}>
-          <Text style={styles.textDescripcion}>
-            <Entypo style={styles.iconos} name="email" size={15} color="black" />
-            {this.state.user.data.email}
-          </Text>
-          <Text style={styles.textDescripcion}>
-            <MaterialCommunityIcons style={styles.iconos} name="bio" size={20} color="black" />: 
-            {this.state.user.data.miniBio}
-          </Text>
-          <Text style={styles.descripcion}>{this.state.post.length} posteos</Text>
-          </View>
+            <Text style={styles.textDescripcion}>
+              <Entypo style={styles.iconos} name="email" size={15} color="black" />
+              {this.state.user.data.email}
+            </Text>
+            <Text style={styles.textDescripcion}>
+              <MaterialCommunityIcons style={styles.iconos} name="bio" size={20} color="black" />: 
+              {this.state.user.data.miniBio}
+            </Text>
+            <Text style={styles.descripcion}>
+              {this.state.post.length} posteos
+            </Text>
+        </View>
         
           <TouchableOpacity  style={styles.button} onPress={() => this.logOut()}>
             <Text style={styles.buttonText}>Cerrar Sesion</Text>
           </TouchableOpacity>
           <Text style={styles.nombrePerfil}>Posteos</Text>
-          {this.state.post.length === 0 ? <Text> Aun no hay posteos </Text> : 
-        <>
+
+        {this.state.post.length === 0 ? <Text> Aun no hay posteos </Text> : 
+        <View>
           <FlatList
             data={this.state.post}
             keyExtractor={post => post.id}
-            renderItem={({ item }) => <> <Post dataPost={item}
-              {...this.props} />
-            
-            <TouchableOpacity  style={styles.button} onPress={() => this.deletePost(item.id)}>
-              <Text style={styles.buttonText}>Delete Post</Text>
-            </TouchableOpacity>
-          </>
-          
+            renderItem={({ item }) =>
+            <> 
+              <Post dataPost={item}
+                              {...this.props} />
+              <TouchableOpacity  style={styles.button} onPress={() => this.deletePost(item.id)}>
+                <Text style={styles.buttonText}>Delete Post</Text>
+              </TouchableOpacity>
+            </>
           }
-        />
-        
-          </>
+          />
+        </View>
         }
-        </View>}
+      </View>}
         
         
-      </ScrollView>
-
-
+   </ScrollView>
     )
   }
 }
+
 const styles = {
   container: {
     flex: 1,

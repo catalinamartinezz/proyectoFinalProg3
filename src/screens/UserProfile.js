@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { FlatList, Text, TouchableOpacity, View } from 'react-native-web';
+import { FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native-web';
 import { auth, db } from '../firebase/config';
 import Post from '../components/Post';
+import {Ionicons, Fontisto, FontAwesome,AntDesign, Entypo, MaterialCommunityIcons} from '@expo/vector-icons'
 
 export default class UserProfile extends Component {
     constructor(props) {
@@ -48,12 +49,24 @@ export default class UserProfile extends Component {
     
   render() {
     return (
-        <>
+        <ScrollView>
         {this.state.loading ? <Text>Cargando</Text> : <View>
-          <Text>{this.state.user.data.nombreUsuario}</Text>
-          <Text>{this.state.user.data.email}</Text>
-          <Text>{this.state.user.data.miniBio}</Text>
-          <Text>{this.state.post.length} posteos</Text>
+          <Text style={styles.nombrePerfil}>
+          <Ionicons style={styles.iconos}name="person" size={24} color='black' />
+            {this.state.user.data.nombreUsuario}
+          </Text>
+          <View style={styles.container1}>
+            <Text  style={styles.textDescripcion}>
+            <Entypo style={styles.iconos} name="email" size={15} color="black" />
+              {this.state.user.data.email}
+            </Text>
+            <Text style={styles.textDescripcion}>
+              <MaterialCommunityIcons style={styles.iconos} name="bio" size={20} color="black" />: 
+              {this.state.user.data.miniBio}
+            </Text>
+            <Text style={styles.descripcion}>{this.state.post.length} posteos</Text>
+          </View>
+          
         </View>}
         {this.state.post.length === 0 ? <Text> Aun no hay posteos </Text>: 
           <FlatList
@@ -64,7 +77,62 @@ export default class UserProfile extends Component {
         />
         }
       
-      </>
+      </ScrollView>
     )
   }
 }
+
+const styles =  {
+  container: {
+    flex: 1,
+		alignItems:'center',
+    marginTop: 10
+	},
+  container1:{
+    alignItems: 'flex-start'
+  },
+	containerIconos:{
+		flexDirection:'row',
+	},
+	iconos:{
+		marginLeft:10,
+	},
+  descripcion:{
+    marginLeft:10,
+    marginBottom: 20,
+    fontSize: 20
+  },
+  button: {
+    padding: 8, 
+    backgroundColor: '#BCCEF8', 
+    borderRadius: 8, 
+    textAlign: 'center', 
+    marginHorizontal: 20,
+    marginBottom:8,
+  }, 
+  buttonText: {
+    fontSize: 15,
+    color: '#FAFAFA',
+    fontWeight:'bold'
+  }, 
+	image: {
+		height: 200,
+		width: 200,
+		alignSelf: 'center'
+	},
+	nombrePerfil:{
+		fontSize: 30,
+    fontStyle: 'bold',
+    color: 'black',
+    fontWeight:'bold',
+    alignSelf:'center',
+    marginBottom: 8
+	},
+	textDescripcion:{
+		fontSize:20,
+    marginBottom: 5
+
+	}
+
+}
+

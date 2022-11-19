@@ -43,8 +43,6 @@ export default class Comments extends Component {
       <View style={styles.container}>
       {this.state.comments.length == 0? <Text >No hay comentarios en este posteo</Text>:
       <View>
-        {/* <Text style={styles.titulo}>Comentarios del posteo</Text> */}
-      
       <FlatList 
         data={this.state.comments}
         keyExtractor={(item)=>item.id}
@@ -98,6 +96,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 0,
   },
   containerComentario:{
+    flex: 3
  
   },
   button: {
