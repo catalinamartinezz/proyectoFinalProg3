@@ -8,6 +8,7 @@ export default class Login extends Component {
   constructor(){
     super();
     this.state = {
+      loading: true,
       email: '',
       password: '',
       errorConsola:'',
@@ -15,9 +16,16 @@ export default class Login extends Component {
       
     };
   }
-
+  componentDidMount(){
+    auth.onAuthStateChanged((user) => {
+    if(user){
+        this.props.navigation.navigate('Home')
+    }     
+})
+this.setState({loading:false})
+}
   loginUser(email, password){ 
-    if(this.state.email === '' && this.state.password===''){
+    if(this.state.email === '' || this.state.password===''){
       this.setState(
         {
           errorMensaje:'Los campos contraseña y email son obligatorios'
@@ -27,7 +35,7 @@ export default class Login extends Component {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
-        this.props.navigation.navigate('HomeMenu');
+        this.props.navigation.navigate('Home');
       })
       .catch(err => this.setState({
 				errorConsola: err.message
@@ -36,6 +44,7 @@ export default class Login extends Component {
 
   render() {
     return (
+      this.state.loading?<Text>Cargando</Text>:
       <View style = {styles.container}>
         <Text style = {styles.logo}>GIRLSGRAM</Text>
         <View>
