@@ -1,5 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 
 import Register from './src/screens/Register';
 import Login from './src/screens/Login';
@@ -9,7 +7,6 @@ import UserProfile from './src/screens/UserProfile'
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ScreenStackHeaderLeftView } from 'react-native-screens';
 
 const Stack = createNativeStackNavigator();
 

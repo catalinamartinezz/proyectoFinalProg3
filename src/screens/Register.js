@@ -41,7 +41,6 @@ export default class Register extends Component {
 					this.setState({
 						email:'',
 						pass:'',
-            posteos:[],
             miniBio:''
 					}); 
 				})

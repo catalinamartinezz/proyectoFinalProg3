@@ -1,23 +1,22 @@
+import React from 'react'
+
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import NewPost from "../screens/NewPost";
-import React, { Component } from 'react';
+import Search from "../screens/Search";
+
 
 import {Foundation, Ionicons, AntDesign} from '@expo/vector-icons'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Search from "../screens/Search";
+
 
 const Tab = createBottomTabNavigator();
 
-export default class HomeMenu extends Component {
-	constructor(props){
-		super(props);
-	}
-	render(){
-		console.log(this.props.route.params);
-	return (
-		<Tab.Navigator>
+export default function HomeMenu() {
+  return (
+
+	<Tab.Navigator>
 			<Tab.Screen 
 				name="Home" 
 				component={Home} 
@@ -39,8 +38,5 @@ export default class HomeMenu extends Component {
 				options={{ tabBarIcon: () => <AntDesign name="search1" size={24} color="#FF884B" />}}
 			/>
 		</Tab.Navigator>
-	);
-	}
+  )
 }
-
-

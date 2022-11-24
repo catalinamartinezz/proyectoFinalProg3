@@ -46,8 +46,8 @@ export default class Login extends Component {
         
         <View>
     
-        <TextInput style={styles.campo} placeholder="email" keyboardType="email-address" onChangeText={(text) => this.setState({ email: text })} value={this.state.email} />
-					<TextInput style={styles.campo} placeholder="password" keyboardType="default" secureTextEntry onChangeText={(text) => this.setState({ password: text })} value={this.state.password} />
+        <TextInput style={styles.campo} placeholder="Email" keyboardType="email-address" onChangeText={(text) => this.setState({ email: text })} value={this.state.email} />
+					<TextInput style={styles.campo} placeholder="Contraseña" keyboardType="default" secureTextEntry onChangeText={(text) => this.setState({ password: text })} value={this.state.password} />
 					
           {
         this.state.email == '' || this.state.password == '' ?
