@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, Text, TouchableOpacity, View, ScrollView } from 'react-native-web';
+import { FlatList, Text, TouchableOpacity, View, ScrollView, StyleSheet } from 'react-native-web';
 import { auth, db } from '../firebase/config';
 import Post from '../components/Post';
 import {Ionicons, Entypo, MaterialCommunityIcons} from '@expo/vector-icons'
@@ -64,9 +64,9 @@ export default class Profile extends Component {
   render() {
 
     return (
-      <ScrollView>
+      <ScrollView >
         {this.state.loading ? <Text>Cargando</Text> : 
-        <View>
+        <View style={styles.container}>
           <Text style={styles.nombrePerfil}>
             <Ionicons style={styles.iconos}name="person" size={24} color='black' />
             {this.state.user.data.nombreUsuario}
@@ -85,13 +85,13 @@ export default class Profile extends Component {
             </Text>
         </View>
         
-          <TouchableOpacity  style={styles.button} onPress={() => this.logOut()}>
+          <TouchableOpacity  style={styles.buttonCerrar} onPress={() => this.logOut()}>
             <Text style={styles.buttonText}>Cerrar Sesion</Text>
           </TouchableOpacity>
-          <Text style={styles.nombrePerfil}>Posteos</Text>
+          
 
         {this.state.post.length === 0 ? <Text> Aun no hay posteos </Text> : 
-        <View>
+        <View style={styles.container}>
           <FlatList
             data={this.state.post}
             keyExtractor={post => post.id}
@@ -100,7 +100,7 @@ export default class Profile extends Component {
               <Post dataPost={item}
                               {...this.props} />
               <TouchableOpacity  style={styles.button} onPress={() => this.deletePost(item.id)}>
-                <Text style={styles.buttonText}>Delete Post</Text>
+                <Text style={styles.buttonText}>Eliminar Posteo</Text>
               </TouchableOpacity>
             </>
           }
@@ -115,14 +115,16 @@ export default class Profile extends Component {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-		alignItems:'center',
-    marginTop: 10
+		// alignItems:'center',
+    marginTop: 10,
+    backgroundColor:'white'
 	},
   container1:{
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    backgroundColor:'white'
   },
 	containerIconos:{
 		flexDirection:'row',
@@ -137,22 +139,29 @@ const styles = {
   },
   button: {
     padding: 8, 
-    backgroundColor: '#BCCEF8', 
+    backgroundColor: '#FF66C4', 
+    borderColor:'#FF66C4',
     borderRadius: 8, 
     textAlign: 'center', 
     marginHorizontal: 20,
     marginBottom:8,
   }, 
+  buttonCerrar:{
+    padding: 8, 
+    backgroundColor: 'black', 
+    borderColor:'black',
+    borderRadius: 8, 
+    textAlign: 'center', 
+    marginHorizontal: 20,
+    marginBottom:8,
+  },
   buttonText: {
     fontSize: 15,
+    fontStyle: 'bold',
     color: '#FAFAFA',
     fontWeight:'bold'
   }, 
-	image: {
-		height: 200,
-		width: 200,
-		alignSelf: 'center'
-	},
+
 	nombrePerfil:{
 		fontSize: 30,
     fontStyle: 'bold',
@@ -167,5 +176,5 @@ const styles = {
 
 	}
 
-}
+})
 

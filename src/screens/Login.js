@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { auth } from '../firebase/config';
-import Register from '../screens/Register'
+
 
 
 export default class Login extends Component {
   constructor(){
     super();
     this.state = {
-      loading: true,
       email: '',
       password: '',
       errorConsola:'',
@@ -16,14 +15,7 @@ export default class Login extends Component {
       
     };
   }
-  componentDidMount(){
-    auth.onAuthStateChanged((user) => {
-    if(user){
-        this.props.navigation.navigate('Home')
-    }     
-})
-this.setState({loading:false})
-}
+
   loginUser(email, password){ 
     if(this.state.email === '' || this.state.password===''){
       this.setState(
@@ -46,7 +38,12 @@ this.setState({loading:false})
     return (
       this.state.loading?<Text>Cargando</Text>:
       <View style = {styles.container}>
-        <Text style = {styles.logo}>GIRLSGRAM</Text>
+         <Image
+          style={styles.image}
+          source={require("../../assets/logoo.png")}
+          resizeMode="contain"
+        />
+        
         <View>
     
         <TextInput style={styles.campo} placeholder="email" keyboardType="email-address" onChangeText={(text) => this.setState({ email: text })} value={this.state.email} />
@@ -81,21 +78,21 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   campo: {
-    fontSize: 14,
-    fontWeight:'bold',
-    color: '#B2B2B2',
-    borderColor: '#B2B2B2', 
+    fontSize: 15,
+    color: '#FF66C4',
+    borderColor: '#FF66C4', 
     borderWidth: 2, 
     borderStyle: 'solid', 
     borderRadius: 5, 
-    marginVertical: 8,
+    marginVertical: 10,
     marginHorizontal: 20,
-    marginVertical: 10,   
+    padding: 10,
+    paddingEnd:80, 
   },
 button: {
   padding: 8, 
-  backgroundColor: '#BCCEF8', 
-  borderColor:'#BCCEF8',
+  backgroundColor: '#FF66C4', 
+  borderColor:'#FF66C4',
   borderRadius: 8, 
   textAlign: 'center', 
   marginHorizontal: 20,
@@ -109,25 +106,23 @@ buttonText: {
 },
 buttonFalso:{
   padding: 8, 
-  backgroundColor: '#B2B2B2', 
+  backgroundColor: '#FFD384', 
   borderColor:'#BCCEF8',
   borderRadius: 8, 
   textAlign: 'center', 
   marginHorizontal: 20,
   marginBottom:8,
-},
-logo:{
-  fontStyle: 'italic',
-  fontWeight:'bold',
-  fontSize: 40,
-  color: '#000000',
-  textAlign: 'center',
-  marginBottom: 100
-  
 }, 
 error:{
-  textAlign: 'center' ,
- 
+  fontWeight:'bold',
+  color: 'red',
+  textAlign:'center',
+  marginVertical: 8,
+  marginHorizontal: 20,
+},
+image:{
+  height: 150,
+  width: 800
 }
 });
 

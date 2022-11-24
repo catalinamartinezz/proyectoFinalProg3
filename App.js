@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import Register from './src/screens/Register';
 import Login from './src/screens/Login';
-import HomeMenu from './src/components/HomeMenu'
+import HomeMenu from './src/components/HomeMenu';
 import Comments from './src/screens/Comments';
 import UserProfile from './src/screens/UserProfile'
 

@@ -49,7 +49,7 @@ export default class UserProfile extends Component {
     
   render() {
     return (
-        <ScrollView>
+        <ScrollView >
         {this.state.loading ? <Text>Cargando</Text> : <View>
           <Text style={styles.nombrePerfil}>
           <Ionicons style={styles.iconos}name="person" size={24} color='black' />
@@ -86,7 +86,8 @@ const styles =  {
   container: {
     flex: 1,
 		alignItems:'center',
-    marginTop: 10
+    marginTop: 10,
+    backgroundColor:'white'
 	},
   container1:{
     alignItems: 'flex-start'

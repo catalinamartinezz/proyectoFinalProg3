@@ -56,47 +56,52 @@ class Post extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				{/* usuario */}
+			
 				<Text style={styles.nombrePerfil}>
 					<Ionicons name="person" size={20} color='black' />
 					{this.props.dataPost.data.owner}
 				</Text>
-				{/* imagen  */}
+			
 				<Image 
                     source={{uri: this.props.dataPost.data.url}}
                     resizeMode="contain"
                     style={styles.image}
                 />
-				{/* descripcion */}
-				<Text style={styles.descripcion}>{this.props.dataPost.data.description}</Text>
-				{/* cantidad de likes  */}
-				{/* boton like/dislike */}
+			
 				{this.state.miLike ? (
-					<View style={styles.containerIconos}>
-						<Text style={styles.iconos}>
-							<Fontisto name="like" size={20} color="black" />
-							{this.state.qLikes}	
-						</Text>
-						<TouchableOpacity onPress={() => this.unLike()} style={styles.iconos}>
-							<AntDesign name="heart" size={24} color="red" />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={() => this.props.navigation.navigate("Comments", {id:this.props.dataPost.id})} style={styles.iconos}>
-							<FontAwesome name="comments" size={24} color="black" />
-						</TouchableOpacity>
+					<View style={styles.container1}>
+						<Text style={styles.descripcion}>{this.props.dataPost.data.description}</Text>
+						<View style={styles.containerIconos}>
+							<Text style={styles.iconos}>
+								<Fontisto name="like" size={20} color="black" />
+								{this.state.qLikes}	
+							</Text>
+							<TouchableOpacity onPress={() => this.unLike()} style={styles.iconos}>
+								<AntDesign name="heart" size={24} color="red" />
+							</TouchableOpacity>
+							<TouchableOpacity onPress={() => this.props.navigation.navigate("Comments", {id:this.props.dataPost.id})} style={styles.iconos}>
+								<FontAwesome name="comments" size={24} color="black" />
+							</TouchableOpacity>
+						</View>
 					</View>
+					
 				) : (
-					<View style={styles.containerIconos}>
-						<Text style={styles.iconos}>
-							<Fontisto name="like" size={20} color="black" />
-							{this.state.qLikes}	
-						</Text>
-						<TouchableOpacity onPress={() => this.like()} style={styles.iconos}>
-							<AntDesign name="hearto" size={24} color="black" />
-						</TouchableOpacity>
-						<TouchableOpacity onPress={() => this.props.navigation.navigate("Comments", {id:this.props.dataPost.id})} style={styles.iconos}>
-							<FontAwesome name="comments" size={24} color="black" />
-						</TouchableOpacity>
+					<View style={styles.container1}>
+						<Text style={styles.descripcion}>{this.props.dataPost.data.description}</Text>
+						<View style={styles.containerIconos}>
+							<Text style={styles.iconos}>
+								<Fontisto name="like" size={20} color="black" />
+								{this.state.qLikes}	
+							</Text>
+							<TouchableOpacity onPress={() => this.like()} style={styles.iconos}>
+								<AntDesign name="hearto" size={24} color="black" />
+							</TouchableOpacity>
+							<TouchableOpacity onPress={() => this.props.navigation.navigate("Comments", {id:this.props.dataPost.id})} style={styles.iconos}>
+								<FontAwesome name="comments" size={24} color="black" />
+							</TouchableOpacity>
+						</View>
 					</View>
+					
 				)}
 			</View>
 		);
@@ -105,11 +110,17 @@ class Post extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		alignItems:'flex-start',
+		// alignItems:'flex-start',
 		borderBottomColor: '#ddd',
 		borderBottomWidth: 1,
 		marginBottom: 10,
 		paddingHorizontal: 20,
+		paddingBottom:10,
+		backgroundColor: 'white',
+	},
+	container1:{
+		flexDirection:'row', 
+		justifyContent:'space-between'
 	},
 	containerIconos:{
 		flexDirection:'row',
@@ -120,7 +131,6 @@ const styles = StyleSheet.create({
 	descripcion:{
 		fontSize:18,
 		marginBottom:10
-		
 	},
     button: {
       padding: 8, 
@@ -136,15 +146,17 @@ const styles = StyleSheet.create({
       fontWeight:'bold'
     }, 
 	image: {
-		height: 200,
-		width: 200,
-		alignSelf: 'center'
+		height: 350,
+		width: 400,
+		alignSelf: 'center',
+		resizeMode: 'contain'
 	},
 	nombrePerfil:{
 		fontSize: 20,
       	fontStyle: 'bold',
       	color: 'black',
-      	fontWeight:'bold'
+      	fontWeight:'bold',
+		marginTop:15
 	},
 	textDescripcion:{
 		fontSize:16 

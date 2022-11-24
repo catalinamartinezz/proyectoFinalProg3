@@ -21,22 +21,22 @@ export default class HomeMenu extends Component {
 			<Tab.Screen 
 				name="Home" 
 				component={Home} 
-				options={{tabBarIcon:()=> <Foundation name="home" size={24} color="#98A8F8"/>}}
+				options={{tabBarIcon:()=> <Foundation name="home" size={24} color="#FF884B"/>}}
 			/>
 			<Tab.Screen 
 				name="Profile" 
 				component={Profile} 
-				options={{tabBarIcon:()=> <Ionicons name="person" size={24} color="#98A8F8" />}}
+				options={{tabBarIcon:()=> <Ionicons name="person" size={24} color="#FF884B" />}}
 			/>
 			<Tab.Screen 
 				name="NewPost" 
 				component={NewPost} 
-				options={{ tabBarIcon: () => <Foundation name="photo" size={24} color="#98A8F8" /> }}
+				options={{ tabBarIcon: () => <Foundation name="photo" size={24} color="#FF884B" /> }}
 			/>
 			<Tab.Screen 
 				name="Search" 
 				component={Search} 
-				options={{ tabBarIcon: () => <AntDesign name="search1" size={24} color="#98A8F8" />}}
+				options={{ tabBarIcon: () => <AntDesign name="search1" size={24} color="#FF884B" />}}
 			/>
 		</Tab.Navigator>
 	);

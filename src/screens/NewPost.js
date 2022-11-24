@@ -51,7 +51,7 @@ export default class NewPost extends Component {
             onImageUpload={(url)=> this.onImageUpload(url)}
         /> :
         <View style={styles.containerA}>
-            <Text style={styles.titulo}>Add description</Text>
+            <Text style={styles.titulo}>Añadir descripcion</Text>
             <TextInput style={styles.descripcion}
                 keyboardType='default'
                 placeholder='Description'
@@ -64,7 +64,7 @@ export default class NewPost extends Component {
                 style={styles.button}
                 onPress={()=>this.savePost()}
             >
-                <Text style={styles.buttonText}> Save Post</Text>
+                <Text style={styles.buttonText}> Guardar Posteo</Text>
             </TouchableOpacity>
         </View>
 
@@ -88,19 +88,21 @@ const styles = StyleSheet.create({
         justifyContent:'center',
     },
     descripcion: {
-        fontSize: 14,
-        fontWeight:'bold',
-        color: '#B2B2B2',
-        borderColor: '#B2B2B2', 
+        fontSize: 15,
+        color: 'black',
+        borderColor: '#FF66C4', 
         borderWidth: 2, 
         borderStyle: 'solid', 
+        borderRadius: 5, 
+        marginVertical: 10,
         marginHorizontal: 20,
-        marginVertical: 10, 
+        padding: 10,
+        paddingEnd:80, 
       },
       button: {
         padding: 8, 
-        backgroundColor: '#BCCEF8', 
-        borderColor:'#BCCEF8',
+        backgroundColor: '#FF66C4', 
+        borderColor:'#FF66C4',
         borderRadius: 8, 
         textAlign: 'center', 
         marginHorizontal: 20,

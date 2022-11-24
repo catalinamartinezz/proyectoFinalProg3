@@ -60,7 +60,7 @@ export default class MyCamera extends Component {
         {this.state.permission?
             this.state.showCamera?
             <View style={styles.camera}>
-              <Text style={styles.titulo}> Smile</Text>
+              <Text style={styles.titulo}> Sonríe</Text>
                 <Camera
                     style={styles.camera}
                     type={Camera.Constants.Type.back}
@@ -74,7 +74,7 @@ export default class MyCamera extends Component {
                 </TouchableOpacity>
             </View> :
             <View style={styles.camera}>
-              <Text style={styles.titulo}>Save or delete Picture</Text>
+              <Text style={styles.titulo}>Guarda o elimina la foto</Text>
                 <Image
                     style={styles.preview}
                     source={{uri:this.state.uri}}      
@@ -84,17 +84,17 @@ export default class MyCamera extends Component {
                  style={styles.button}
                  onPress={()=> this.savePicture()}
                 >
-                    <Text style={styles.buttonText}><Entypo name="save" size={20} color="white" /> Picture </Text>
+                    <Text style={styles.buttonText}><Entypo name="save" size={20} color="white" /> Foto </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                  style={styles.button}
                  onPress={()=> this.clearPicture()}
                  >
-                <Text style={styles.buttonText}><AntDesign name="delete" size={20} color="white" /> Picture</Text>
+                <Text style={styles.buttonText}><AntDesign name="delete" size={20} color="white" /> Foto</Text>
                 </TouchableOpacity>
             </View>:
-            <Text style={styles.titulo}>Camera is not available</Text>
+            <Text style={styles.titulo}>La camara no esta disponible</Text>
         }
     </View>    
     </View>
@@ -119,8 +119,8 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 8, 
-    backgroundColor: '#BCCEF8', 
-    borderColor:'#BCCEF8',
+    backgroundColor: '#FF66C4', 
+    borderColor:'#FF66C4',
     borderRadius: 8, 
     textAlign: 'center', 
     marginHorizontal: 20,

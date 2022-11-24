@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { db, auth } from '../firebase/config';
 import { View,
          FlatList, 
-        ScrollView } from 'react-native';
+        ScrollView, StyleSheet } from 'react-native';
 import Post from '../components/Post';
 
 class Home extends Component {
@@ -37,7 +37,7 @@ class Home extends Component {
     render(){
         return(
             <ScrollView>
-                <View> 
+                <View style={styles.container}> 
                     <FlatList 
                         data={this.state.posts}
                         keyExtractor={post => post.id}
@@ -50,5 +50,10 @@ class Home extends Component {
         )
     }
 }
-
 export default Home;
+
+const styles = StyleSheet.create({
+    container:{
+        backgroundColor:'white'
+    }
+})

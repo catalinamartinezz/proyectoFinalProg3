@@ -40,9 +40,10 @@ export default class Comments extends Component {
    
   render() {
     return (
+      <View style={styles.grande}>
       <View style={styles.container}>
       {this.state.comments.length == 0? <Text >No hay comentarios en este posteo</Text>:
-      <View>
+      <ScrollView>
       <FlatList 
         data={this.state.comments}
         keyExtractor={(item)=>item.id}
@@ -50,20 +51,20 @@ export default class Comments extends Component {
           <View style={styles.comentario}>
             <Text  style={styles.nombrePerfil} >
               <Ionicons name="person" size={20} color='black' />
-               {item.owner}
+                 {item.owner}
             </Text>
             <Text>
               <Fontisto name="comment" size={15} color="black" />
-               {item.description}
+                 {item.description}
             </Text>
             
          </View>
       )}
       />
-      </View>}
+      </ScrollView>}
       
       <View style={styles.containerComentario}>
-      {/* <Text style={styles.titulo2}>Agregar comentario</Text> */}
+      
       <TextInput style={styles.descripcion}
       keyboardType='default'
       placeholder='Agrega un comentario'
@@ -84,16 +85,20 @@ export default class Comments extends Component {
       </TouchableOpacity>
       </View>
       </View>
+      </View>
     )
   }
 }
 const styles = StyleSheet.create({
+  grande:{
+    backgroundColor:'white'
+  },
   comentario: {
     flexDirection:'column',
-    borderBottomColor: '#ddd',
-		borderBottomWidth: 1,
-		marginBottom: 10,
-		paddingHorizontal: 0,
+    borderColor:'#ddd',
+    borderBottomWidth: 2,
+    backgroundColor:'white',
+    padding: 10
   },
   containerComentario:{
     flex: 3
@@ -101,8 +106,8 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 8, 
-    backgroundColor: '#BCCEF8', 
-    borderColor:'#BCCEF8',
+    backgroundColor: '#FF66C4', 
+    borderColor:'#FF66C4',
     borderRadius: 8, 
     textAlign: 'center', 
     marginHorizontal: 20,
@@ -116,7 +121,7 @@ const styles = StyleSheet.create({
   },
   buttonFalso:{
     padding: 8, 
-    backgroundColor: '#B2B2B2', 
+    backgroundColor: '#FFD384', 
     borderColor:'#BCCEF8',
     borderRadius: 8, 
     textAlign: 'center', 
@@ -137,13 +142,15 @@ const styles = StyleSheet.create({
   },
   descripcion: {
     fontSize: 14,
-    fontWeight:'bold',
-    color: '#B2B2B2',
-    borderColor: '#B2B2B2', 
+    color: 'black',
+    borderColor: '#FF66C4', 
     borderWidth: 2, 
     borderStyle: 'solid', 
+    borderRadius: 5, 
+    marginVertical: 10,
     marginHorizontal: 20,
-    marginVertical: 10, 
+    padding: 10,
+    paddingEnd:90, 
   },
   nombrePerfil:{
 		fontSize: 15,

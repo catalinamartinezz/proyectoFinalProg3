@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { db, auth } from '../firebase/config';
 
-import { View,Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View,Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
 export default class Register extends Component {
   constructor(props){
@@ -24,15 +24,9 @@ export default class Register extends Component {
       }
     })
   }
+  
   registerUser(email, pass, nombreUsuario, miniBio) {
-    if(this.state.email === '' || this.state.pass==='' || this.state.nombreUsuario===''){
-      this.setState(
-        {
-          errorMensaje:'Los campos contraseña, email y nombre de usuario son obligatorios'
-        }
-      )
-    }
-		auth
+   auth
 			.createUserWithEmailAndPassword(email, pass)
 			.then((res) => {
 				db
@@ -47,7 +41,7 @@ export default class Register extends Component {
 					this.setState({
 						email:'',
 						pass:'',
-						posteos:[],
+            posteos:[],
             miniBio:''
 					}); 
 				})
@@ -56,67 +50,115 @@ export default class Register extends Component {
 			.catch(err => this.setState({
 				errorConsola: err.message
 			}));
+
+      if(this.state.email === '' || this.state.pass==='' || this.state.nombreUsuario===''){
+        this.setState(
+          {
+            errorMensaje:'Los campos contraseña, email y nombre de usuario son obligatorios'
+          }
+        )
+      }
 	}
+
   render() {
     return (
-    <View style={styles.container}>
-    <View >
-        <Text style={styles.logo}>GIRLSGRAM</Text>
-        <View>
-        <TextInput 
-				style={styles.campo} 
-				placeholder="Email" 
-				keyboardType="email-address" 
-				onChangeText={(text) => {
-					this.setState({ 
-					email: text 
-					})
-				}} 
-				value={this.state.email} 
+    
+    <View style={styles.container} >
+        <Image
+          style={styles.image}
+          source={require("../../assets/logoo.png")}
+          resizeMode="contain"
         />
+        <View>
+     
+          <TextInput 
+				    style={styles.campo} 
+				    placeholder="Email" 
+				    keyboardType="email-address" 
+				    onChangeText={(text) => {
+					    this.setState({ 
+					      email: text 
+					    })
+				    }} 
+				    value={this.state.email} 
+          />
     
-		<TextInput
-			style={styles.campo}
-			placeholder="Nombre de usuario"
-			keyboardType="default"
-			onChangeText={(text) => this.setState({ nombreUsuario: text })}
-			value={this.state.nombreUsuario}
-		/>
+		      <TextInput
+			      style={styles.campo}
+			      placeholder="Nombre de usuario"
+			      keyboardType="default"
+			      onChangeText={(text) => {
+              this.setState({
+                 nombreUsuario: text 
+              })
+            }}
+			      value={this.state.nombreUsuario}
+		      />
     
-    <TextInput
-			style={styles.campo}
-			placeholder="Mini Bio"
-			keyboardType="default"
-			onChangeText={(text) => this.setState({ miniBio: text })}
-			value={this.state.miniBio}
-		/>
+         <TextInput
+			      style={styles.campo}
+			      placeholder="Mini Bio"
+			      keyboardType="default"
+			      onChangeText={(text) => {
+              this.setState({
+                 miniBio: text
+              })
+            }}
+			      value={this.state.miniBio}
+		      />
     
-		<TextInput 
-			style={styles.campo} 
-			placeholder="Contraseña" 
-			keyboardType="default" 
-			secureTextEntry 
-			onChangeText={(text) => this.setState({ pass: text })} 
-			value={this.state.pass} 
-		/>
+		    <TextInput 
+			    style={styles.campo} 
+			    placeholder="Contraseña" 
+			    keyboardType="default" 
+			    secureTextEntry 
+			    onChangeText={(text) => {
+            this.setState({ 
+              pass: text 
+            })
+          }} 
+			    value={this.state.pass} 
+		    />
+
    {
-    this.state.email === '' || this.state.pass==='' || this.state.nombreUsuario=== ''?
-      <TouchableOpacity  style={styles.buttonFalso} onPress={() => this.registerUser(this.state.email, this.state.pass, this.state.nombreUsuario, this.state.miniBio)}>
-        <Text style={styles.buttonText}>Registrarme</Text>
-      </TouchableOpacity>: 
+    this.state.email === '' ||  this.state.pass==='' || this.state.nombreUsuario=== ''?
+   
+      <TouchableOpacity  
+        style={styles.buttonFalso} 
+        onPress={() => this.registerUser(this.state.email, this.state.pass, this.state.nombreUsuario, this.state.miniBio)}
+      >
+        <Text style={styles.buttonText}> Registrarme</Text>
+      </TouchableOpacity>  : 
       
-      <TouchableOpacity onPress={() => this.registerUser(this.state.email, this.state.pass, this.state.nombreUsuario, this.state.miniBio)} style={styles.button}>
-						<Text style={styles.buttonText}>Registrarme</Text>
+      <TouchableOpacity 
+        onPress={() => this.registerUser(this.state.email, this.state.pass, this.state.nombreUsuario, this.state.miniBio)} 
+        style={styles.button}
+      >
+						<Text style={styles.buttonText}>
+              Registrarme
+            </Text>
 			</TouchableOpacity> 
+
    }
        
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={styles.button}>
-          <Text style={styles.buttonText}>Ya tengo cuenta</Text>
-        </TouchableOpacity>
+      <TouchableOpacity 
+        onPress={() => this.props.navigation.navigate('Login')} 
+        style={styles.button}
+      >
+          <Text style={styles.buttonText}>
+            Ya tengo cuenta
+          </Text>
+      </TouchableOpacity>
+
+      <Text style={styles.error}>
+        {this.state.errorConsola}
+      </Text>
+
+      <Text style={styles.error}>
+        {this.state.errorMensaje}
+      </Text>
+
         </View>
-        <Text style={styles.error}>{this.state.errorConsola}</Text>
-        <Text style={styles.error}>{this.state.errorMensaje}</Text>
-    </View>
     </View>
 
     )
@@ -130,22 +172,21 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   campo: {
-    fontSize: 14,
-    fontWeight:'bold',
-    color: '#B2B2B2',
-    borderColor: '#B2B2B2', 
+    fontSize: 15,
+    color: '#FF66C4',
+    borderColor: '#FF66C4', 
     borderWidth: 2, 
     borderStyle: 'solid', 
     borderRadius: 5, 
-    marginVertical: 8,
-    marginHorizontal: 20,
     marginVertical: 10,
-  
+    marginHorizontal: 20,
+    padding: 10,
+    paddingEnd:80, 
   },
 button: {
   padding: 8, 
-  backgroundColor: '#BCCEF8', 
-  borderColor:'#BCCEF8',
+  backgroundColor: '#FF66C4', 
+  borderColor:'#FF66C4',
   borderRadius: 8, 
   textAlign: 'center', 
   marginHorizontal: 20,
@@ -159,25 +200,24 @@ buttonText: {
 },
 buttonFalso:{
   padding: 8, 
-  backgroundColor: '#B2B2B2', 
+  backgroundColor: '#FFD384', 
   borderColor:'#BCCEF8',
   borderRadius: 8, 
   textAlign: 'center', 
   marginHorizontal: 20,
   marginBottom:8,
 },
-logo:{
-  fontStyle: 'italic',
-  fontWeight:'bold',
-  fontSize: 40,
-  color: '#000000',
-  textAlign: 'center',
-  marginBottom: 100
-  
-}, 
-error:{
-  textAlign: 'center' ,
  
+error:{
+  fontWeight:'bold',
+  color: 'red',
+  textAlign:'center',
+  marginVertical: 8,
+  marginHorizontal: 20,
 },
+image:{
+  height: 150,
+  width: 800
+}
 
 });

@@ -6,6 +6,7 @@ import { View,
          TouchableOpacity, 
          StyleSheet, 
          FlatList } from 'react-native';
+import {FontAwesome} from '@expo/vector-icons'
 
 class Search extends Component{
     constructor(props){
@@ -55,22 +56,22 @@ class Search extends Component{
         return(
                 <View style={styles.container}>
                 
-                    <Text style= {styles.titulo}>User search</Text>
-                     <View >
+                    <Text style= {styles.titulo}>Buscar...</Text>
+                     <View style={styles.buscador}>
                         <TextInput 
                             style={styles.campo}
                             keyboardType='default'
-                            placeholder='Insert user name'
+                            placeholder='Insertar Nombre'
                             value={this.state.filterBy}
                             onChangeText={(text) => {this.setState({busqueda:text})}}
                         />  
                         <TouchableOpacity
-                            style={styles.button} 
                             onPress={()=>this.search()}
                             >
-                            <Text style={ styles.text}>Search</Text>
+                            <Text style={styles.hola}><FontAwesome name="search" size={50} color="#FF66C4" /></Text>
                         </TouchableOpacity>                         
                     </View>
+
                     { this.state.resultado == false ?
                      <Text> No se encontraron resultados de búsqueda.</Text> :
                     <FlatList 
@@ -78,7 +79,7 @@ class Search extends Component{
                        keyExtractor={(item) => item.id}
                        renderItem={({ item }) => (
                            <View>
-                            <TouchableOpacity  onPress={() => this.props.navigation.navigate("UserProfile", {owner:item.data.email})} >
+                            <TouchableOpacity   onPress={() => this.props.navigation.navigate("UserProfile", {owner:item.data.email})} >
                                 <Text> {item.data.nombreUsuario}</Text>
                             </TouchableOpacity>
                             </View> )}
@@ -88,34 +89,30 @@ class Search extends Component{
         )}}
 
 const styles = StyleSheet.create({
-
     container:{
         flex: 1,
         alignItems: 'center',
         justifyContent:'center',
         backgroundColor: 'white',
-      },
-      campo: {
+    },
+    buscador:{
+        flexDirection:'row'
+    },
+    hola:{
+        alignItems:'flex-end'
+    },
+    campo: {
         fontSize: 14,
-        fontWeight:'bold',
-        color: '#B2B2B2',
-        borderColor: '#B2B2B2', 
+        color: 'black',
+        borderColor: '#FF66C4', 
         borderWidth: 2, 
         borderStyle: 'solid', 
         borderRadius: 5, 
-        marginVertical: 8,
+        marginVertical: 10,
         marginHorizontal: 20,
-        marginVertical: 10,   
-      },
-    button: {
-      padding: 8, 
-      backgroundColor: '#BCCEF8', 
-      borderColor:'#BCCEF8',
-      borderRadius: 8, 
-      textAlign: 'center', 
-      marginHorizontal: 20,
-      marginBottom:8,
-    }, 
+        padding: 10,
+        paddingEnd:90, 
+    },
     buttonText: {
       fontSize: 15,
       fontStyle: 'bold',
@@ -124,8 +121,9 @@ const styles = StyleSheet.create({
     },
     titulo:{
         fontWeight:'bold',
-        fontSize:30
-      }
+        fontSize:30,
+        alignSelf:'flex-start'
+    }
     
     });
 
